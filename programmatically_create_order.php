@@ -2,13 +2,29 @@
 function mrpi_create_order(){
 	$product = WC_Helper_Product::create_simple_product();
 	WC_Helper_Shipping::create_simple_flat_rate();
-	$order_data = array('status' => 'pending', 'customer_id' => 1, 'customer_note' => '', 'total' => '');
-	$_SERVER['REMOTE_ADDR'] = '127.0.0.1';
+	$order_data = array(
+		'status' => 'pending', 
+		'customer_id' => 1, 
+		'customer_note' => '', 
+		'total' => ''
+	);
 	$order = wc_create_order($order_data);
 
 	$item_id = $order->add_product($product, 4);
 
-	$billing_address = array('country' => 'US', 'first_name' => 'Jeroen', 'last_name' => 'Sormani', 'company' => 'WooCompany', 'address_1' => 'WooAddress', 'address_2' => '', 'postcode' => '123456', 'city' => 'WooCity', 'state' => 'NY', 'email' => 'admin@example.org', 'phone' => '555-32123');
+	$billing_address = array(
+		'country' => 'US', 
+		'first_name' => 'Jeroen', 
+		'last_name' => 'Sormani', 
+		'company' => 'WooCompany', 
+		'address_1' => 'WooAddress', 
+		'address_2' => '', 
+		'postcode' => '123456', 
+		'city' => 'WooCity', 
+		'state' => 'NY', 
+		'email' => 'admin@example.org', 
+		'phone' => '555-32123'
+	);
 	$order->set_address($billing_address, 'billing');
 
 	$shipping_taxes = WC_Tax::calc_shipping_tax('10', WC_Tax::get_shipping_tax_rates());
